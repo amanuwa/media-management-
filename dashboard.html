@@ -3,119 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Governmental communication media management board</title>
+    <title>Governmental communication media management boared</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { 
-            margin: 0; color: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column;
-            background-color: #02040e; position: relative; overflow-x: hidden;
+            margin: 0; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column;
+            background-color: #ffffff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
-        #cyberCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-        .app-interface { position: relative; z-index: 10; }
     </style>
 </head>
 <body class="flex flex-col justify-between">
 
-    <!-- Holographic Background Canvas -->
-    <canvas id="cyberCanvas"></canvas>
-
     <!-- Top Security Header with Logged In User & Sign Out -->
-    <header class="app-interface w-full bg-slate-900/95 backdrop-blur-md border-b border-blue-500/30 px-6 py-4 flex justify-between items-center shadow-lg">
+    <header class="w-full bg-slate-900 text-slate-100 px-6 py-4 flex justify-between items-center shadow-md">
         <div class="flex items-center space-x-3">
-            <div class="h-3 w-3 rounded-full bg-blue-500 animate-pulse"></div>
-            <span class="text-blue-400 font-mono text-xs md:text-sm tracking-wider font-bold">// ETHIOPIAN COMMUNICATION BUREAU MANAGING PORTAL</span>
+            <div class="h-3 w-3 rounded-full bg-cyan-400 animate-pulse"></div>
+            <span class="text-cyan-400 text-xs md:text-sm tracking-wider font-bold">// ETHIOPIAN COMMUNICATION BUREAU MANAGING PORTAL</span>
         </div>
-        <div class="flex items-center space-x-4 font-mono text-xs">
-            <div class="text-slate-300 flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
-                <i class="fa-solid fa-user-shield text-blue-400"></i>
+        <div class="flex items-center space-x-4 text-xs">
+            <div class="text-slate-300 flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                <i class="fa-solid fa-user-shield text-cyan-400"></i>
                 <span id="loggedInUser">Loading Operator...</span>
             </div>
-            <button onclick="handleSignOut()" class="bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-500/30 px-3 py-1.5 rounded-lg transition flex items-center space-x-1.5 cursor-pointer">
+            <button onclick="handleSignOut()" class="bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/40 px-3 py-1.5 rounded-lg transition flex items-center space-x-1.5 cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Sign Out</span>
             </button>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="app-interface flex-grow max-w-7xl w-full mx-auto px-4 py-8 flex flex-col items-center">
+    <!-- Main Content Container (Full Width Edge-to-Edge) -->
+    <main class="flex-grow w-full px-0 py-8 flex flex-col items-center">
         
         <!-- Portal Main Title -->
-        <div class="text-center mb-8">
-            <h1 class="text-xl md:text-2xl font-bold text-white font-mono tracking-tight">Governmental communication media management boared</h1>
-            <p class="text-xs text-slate-400 font-mono mt-1">Central Oversight & Compliance Control Dashboard</p>
+        <div class="text-center mb-6 px-4">
+            <h1 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Governmental communication media management boared</h1>
+            <p class="text-xs text-slate-500 mt-1">Central Oversight & Compliance Control Dashboard</p>
         </div>
 
         <!-- Three Side-by-Side Control Buttons -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-8 px-4">
             <!-- Button 1 -->
-            <button onclick="switchTab('corporate')" id="btnCorporate" class="bg-blue-600 text-white font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center space-x-2 cursor-pointer border border-blue-400/40">
+            <button onclick="switchTab('corporate')" id="btnCorporate" class="bg-cyan-600 text-white text-xs font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer border border-cyan-500">
                 <i class="fa-solid fa-building"></i>
                 <span>1 - Governmental corporate</span>
             </button>
             <!-- Button 2 -->
-            <button onclick="switchTab('ministry')" id="btnMinistry" class="bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer">
+            <button onclick="switchTab('ministry')" id="btnMinistry" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-3.5 px-6 rounded-xl shadow-sm border border-slate-300 transition flex items-center justify-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-landmark"></i>
                 <span>2 - Ministry institution</span>
             </button>
             <!-- Button 3 (Routes to message.html) -->
-            <button onclick="window.location.href='message.html'" class="bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer">
+            <button onclick="window.location.href='message.html'" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-3.5 px-6 rounded-xl shadow-sm border border-slate-300 transition flex items-center justify-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-comments"></i>
                 <span>3 - Message</span>
             </button>
         </div>
 
-        <!-- Dynamic Data Section (Changes data values based on selected button) -->
-        <div id="dataSection" class="w-full space-y-8">
+        <!-- Dynamic Edge-to-Edge Tables Section -->
+        <div id="dataSection" class="w-full space-y-6">
             
-            <!-- Table 1: Posts Log (Last Month - Current Month) -->
-            <div class="bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 shadow-xl">
-                <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800 font-mono">
-                    <h2 id="table1Title" class="text-sm font-bold text-white uppercase tracking-wider">Posts Analysis (August 2026 - September 2026)</h2>
-                    <span class="text-xs text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded border border-blue-500/20">Active Matrix</span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left font-mono text-xs">
-                        <thead>
-                            <tr class="text-slate-400 border-b border-slate-800">
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Institution Name</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Date Posted</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Data Posted</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Data Type</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Username Posted</th>
-                            </tr>
-                        </thead>
-                        <tbody id="postsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-                            <!-- Populated dynamically via script -->
-                        </tbody>
-                    </table>
+            <!-- Table 1: Posts Log (Edge to Edge) -->
+            <div class="w-full bg-slate-50 border-y border-slate-200 py-6 px-4 md:px-8 shadow-sm">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                        <h2 id="table1Title" class="text-xs md:text-sm font-bold text-slate-900 uppercase tracking-wider">Posts Analysis (August 2026 - September 2026)</h2>
+                        <span class="text-[10px] text-cyan-700 bg-cyan-100 px-2.5 py-1 rounded border border-cyan-300">Active Matrix</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead>
+                                <tr class="text-slate-500 border-b border-slate-200">
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Institution Name</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Date Posted</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Data Posted</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Data Type</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Username Posted</th>
+                                </tr>
+                            </thead>
+                            <tbody id="postsTableBody" class="divide-y divide-slate-200 text-slate-800">
+                                <!-- Populated dynamically via script -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- Table 2: Activity Status Tracking (Green/Red Evaluation) -->
-            <div class="bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 shadow-xl">
-                <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800 font-mono">
-                    <h2 id="table2Title" class="text-sm font-bold text-white uppercase tracking-wider">Institution Activity Status (August 2026 - September 2026)</h2>
-                    <div class="flex space-x-2 text-[10px]">
-                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded">Green: Frequently Posting</span>
-                        <span class="bg-red-500/10 text-red-400 border border-red-500/30 px-2 py-0.5 rounded">Red: Not Posting</span>
+            <!-- Table 2: Activity Status Tracking (Edge to Edge) -->
+            <div class="w-full bg-white border-y border-slate-200 py-6 px-4 md:px-8 shadow-sm">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                        <h2 id="table2Title" class="text-xs md:text-sm font-bold text-slate-900 uppercase tracking-wider">Institution Activity Status (August 2026 - September 2026)</h2>
+                        <div class="flex space-x-2 text-[10px]">
+                            <span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded font-bold">Green: Frequently Posting</span>
+                            <span class="bg-red-100 text-red-800 border border-red-300 px-2 py-0.5 rounded font-bold">Red: Not Posting</span>
+                        </div>
                     </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left font-mono text-xs">
-                        <thead>
-                            <tr class="text-slate-400 border-b border-slate-800">
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Institution Name</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Sector Type</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Compliance Status</th>
-                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Total Outputs</th>
-                            </tr>
-                        </thead>
-                        <tbody id="statusTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-                            <!-- Populated dynamically via script -->
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead>
+                                <tr class="text-slate-500 border-b border-slate-200">
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Institution Name</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Sector Type</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Compliance Status</th>
+                                    <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Total Outputs</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statusTableBody" class="divide-y divide-slate-200 text-slate-800">
+                                <!-- Populated dynamically via script -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -123,36 +122,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="app-interface border-t border-blue-500/20 bg-slate-900/90 py-4 text-center text-slate-400 font-mono text-xs shadow-inner">
+    <footer class="w-full border-t border-slate-200 bg-slate-900 text-slate-400 py-4 text-center text-xs">
         &copy; 2026 Ethiopian Communication Bureau - Secure Infrastructure Division
     </footer>
-
-    <!-- Background Canvas Animation Script -->
-    <script>
-        const canvas = document.getElementById('cyberCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
-        const streams = [];
-        for (let i = 0; i < 35; i++) {
-            streams.push({ x: (Math.random() - 0.5) * width * 2, y: (Math.random() - 0.5) * height * 2, z: Math.random() * width, speed: Math.random() * 1.5 + 0.5 });
-        }
-        function animate() {
-            ctx.fillStyle = 'rgba(2, 4, 14, 0.25);'; ctx.fillRect(0, 0, width, height);
-            const cx = width / 2, cy = height / 2;
-            streams.forEach(s => {
-                s.z -= s.speed; if (s.z <= 0) { s.z = width; s.x = (Math.random() - 0.5) * width * 2; s.y = (Math.random() - 0.5) * height * 2; }
-                const k = 300 / s.z; const px = s.x * k + cx, py = s.y * k + cy;
-                if (px >= 0 && px <= width && py >= 0 && py <= height) {
-                    ctx.beginPath(); ctx.arc(px, py, k * 1.2, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(0, 242, 254, ${1 - s.z / width})`; ctx.fill();
-                }
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
 
     <!-- Session & Dynamic Table Logic -->
     <script type="module">
@@ -166,13 +138,12 @@
                 const displayName = metadata?.full_name || metadata?.username || session.user.email;
                 document.getElementById('loggedInUser').textContent = displayName;
             } else {
-                // Fallback if accessed without active session
-                document.getElementById('loggedInUser').textContent = "Amanuel Bekele (Authorized)";
+                document.getElementById('loggedInUser').textContent = "Operator (Guest)";
             }
         }
         checkUserSession();
 
-        // 2. Functional Sign Out
+        // 2. Functional Sign Out routing to index.html
         window.handleSignOut = async function() {
             try {
                 await supabase.auth.signOut();
@@ -183,7 +154,7 @@
             }
         }
 
-        // 3. Dataset definitions for Corporate vs Ministry views (Last Month - Current Month: August 2026 - September 2026)
+        // 3. Dataset definitions for Corporate vs Ministry views (August 2026 - September 2026)
         const datasets = {
             corporate: {
                 t1Title: "Governmental Corporate Posts (August 2026 - September 2026)",
@@ -221,18 +192,18 @@
             }
         };
 
-        // 4. Render Table Functions
+        // 4. Render Table Functions & Button Switcher
         window.switchTab = function(type) {
             const btnCorp = document.getElementById('btnCorporate');
             const btnMin = document.getElementById('btnMinistry');
             
             if (type === 'corporate') {
-                btnCorp.className = "bg-blue-600 text-white font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center space-x-2 cursor-pointer border border-blue-400/40";
-                btnMin.className = "bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer";
+                btnCorp.className = "bg-cyan-600 text-white text-xs font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer border border-cyan-500";
+                btnMin.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-3.5 px-6 rounded-xl shadow-sm border border-slate-300 transition flex items-center justify-center space-x-2 cursor-pointer";
                 renderData(datasets.corporate);
             } else {
-                btnMin.className = "bg-blue-600 text-white font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center space-x-2 cursor-pointer border border-blue-400/40";
-                btnCorp.className = "bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer";
+                btnMin.className = "bg-cyan-600 text-white text-xs font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center space-x-2 cursor-pointer border border-cyan-500";
+                btnCorp.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-3.5 px-6 rounded-xl shadow-sm border border-slate-300 transition flex items-center justify-center space-x-2 cursor-pointer";
                 renderData(datasets.ministry);
             }
         }
@@ -244,12 +215,12 @@
             // Render Posts Table
             const postsBody = document.getElementById('postsTableBody');
             postsBody.innerHTML = dataObj.posts.map(p => `
-                <tr class="hover:bg-slate-800/40 transition">
-                    <td class="py-3 px-3 font-medium text-white">${p.institution}</td>
-                    <td class="py-3 px-3 text-slate-400">${p.date}</td>
-                    <td class="py-3 px-3 text-blue-300">${p.dataPosted}</td>
-                    <td class="py-3 px-3"><span class="bg-slate-800 px-2 py-0.5 rounded text-[10px] text-slate-300 border border-slate-700">${p.type}</span></td>
-                    <td class="py-3 px-3 text-slate-400">@${p.user}</td>
+                <tr class="hover:bg-slate-100 transition">
+                    <td class="py-3 px-3 font-semibold text-slate-900">${p.institution}</td>
+                    <td class="py-3 px-3 text-slate-600">${p.date}</td>
+                    <td class="py-3 px-3 text-cyan-700 font-medium">${p.dataPosted}</td>
+                    <td class="py-3 px-3"><span class="bg-slate-200 px-2 py-0.5 rounded text-[10px] text-slate-700 border border-slate-300">${p.type}</span></td>
+                    <td class="py-3 px-3 text-slate-600">@${p.user}</td>
                 </tr>
             `).join('');
 
@@ -257,21 +228,21 @@
             const statusBody = document.getElementById('statusTableBody');
             statusBody.innerHTML = dataObj.statuses.map(s => {
                 const badgeColor = s.type === 'green' 
-                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' 
-                    : 'bg-red-500/10 text-red-400 border-red-500/30';
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-300' 
+                    : 'bg-red-100 text-red-800 border-red-300';
                 const icon = s.type === 'green' ? 'fa-circle-check' : 'fa-triangle-exclamation';
                 
                 return `
-                    <tr class="hover:bg-slate-800/40 transition">
-                        <td class="py-3 px-3 font-medium text-white">${s.institution}</td>
-                        <td class="py-3 px-3 text-slate-400">${s.sector}</td>
+                    <tr class="hover:bg-slate-100 transition">
+                        <td class="py-3 px-3 font-semibold text-slate-900">${s.institution}</td>
+                        <td class="py-3 px-3 text-slate-600">${s.sector}</td>
                         <td class="py-3 px-3">
                             <span class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded border text-[10px] font-bold ${badgeColor}">
                                 <i class="fa-solid ${icon}"></i>
                                 <span>${s.status}</span>
                             </span>
                         </td>
-                        <td class="py-3 px-3 text-slate-300 font-bold">${s.count}</td>
+                        <td class="py-3 px-3 text-slate-800 font-bold">${s.count}</td>
                     </tr>
                 `;
             }).join('');
