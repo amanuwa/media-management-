@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Sign In - Ethiopian Communication Bureau</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            margin: 0; color: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column;
+            background-color: #02040e; position: relative; overflow-x: hidden;
+        }
+        #cyberCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .app-interface { position: relative; z-index: 10; }
+    </style>
+</head>
+<body class="flex flex-col justify-between">
+
+    <!-- Holographic Background Canvas -->
+    <canvas id="cyberCanvas"></canvas>
+
+    <!-- Top Security Header -->
+    <header class="app-interface w-full bg-slate-900/95 backdrop-blur-md border-b border-blue-500/30 px-6 py-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="h-3 w-3 rounded-full bg-blue-500 animate-pulse"></div>
+            <span class="text-blue-400 font-mono text-xs md:text-sm tracking-wider font-bold">// ETHIOPIAN COMMUNICATION BUREAU MANAGING PORTAL</span>
+        </div>
+        <div class="text-xs font-mono text-slate-400 hidden sm:block">STATUS: SECURE GATEWAY ACTIVE</div>
+    </header>
+
+    <!-- Main Sign In Container -->
+    <main class="app-interface flex-grow flex items-center justify-center px-4 py-12">
+        <div class="max-w-md w-full bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-400"></div>
+
+            <div class="mb-6 text-center">
+                <div class="inline-flex p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-3 shadow-inner">
+                    <i class="fa-solid fa-fingerprint text-xl"></i>
+                </div>
+                <h1 class="text-lg font-bold text-white tracking-tight">Operator Authentication</h1>
+                <p class="text-xs text-slate-400 mt-1">Provide credentials to enter the messaging ecosystem</p>
+            </div>
+
+            <form onsubmit="handleSignin(event)" class="space-y-4 text-xs font-mono">
+                <!-- Institutional Email -->
+                <div>
+                    <label class="block text-slate-300 mb-1 uppercase tracking-wider text-[10px]">Institutional Email</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-3 text-slate-500"></i>
+                        <input type="email" id="loginEmail" required placeholder="operator@gmail.com" 
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-slate-300 uppercase tracking-wider text-[10px]">Secure Password</label>
+                        <a href="#" class="text-[10px] text-blue-400 hover:underline">Reset Credentials?</a>
+                    </div>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-3.5 top-3 text-slate-500"></i>
+                        <input type="password" id="loginPassword" required placeholder="••••••••••••" 
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl tracking-wider uppercase transition shadow-lg shadow-blue-600/30 mt-3 cursor-pointer flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span>Authenticate & Access Studio</span>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center border-t border-slate-800 pt-4 text-xs font-mono">
+                <span class="text-slate-400">Need institutional clearance?</span> 
+                <a href="signup.html" class="text-blue-400 hover:underline ml-1 font-semibold">Register Entity</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-interface border-t border-blue-500/20 bg-slate-900/90 py-4 text-center text-slate-400 font-mono text-xs shadow-inner">
+        &copy; 2026 Ethiopian Communication Bureau - Secure Infrastructure Division
+    </footer>
+
+    <!-- Background Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('cyberCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        const streams = [];
+        for (let i = 0; i < 35; i++) {
+            streams.push({ x: (Math.random() - 0.5) * width * 2, y: (Math.random() - 0.5) * height * 2, z: Math.random() * width, speed: Math.random() * 1.5 + 0.5 });
+        }
+        function animate() {
+            ctx.fillStyle = 'rgba(2, 4, 14, 0.25)'; ctx.fillRect(0, 0, width, height);
+            const cx = width / 2, cy = height / 2;
+            streams.forEach(s => {
+                s.z -= s.speed; if (s.z <= 0) { s.z = width; s.x = (Math.random() - 0.5) * width * 2; s.y = (Math.random() - 0.5) * height * 2; }
+                const k = 300 / s.z; const px = s.x * k + cx, py = s.y * k + cy;
+                if (px >= 0 && px <= width && py >= 0 && py <= height) {
+                    ctx.beginPath(); ctx.arc(px, py, k * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 242, 254, ${1 - s.z / width})`; ctx.fill();
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Supabase Authentication Module -->
+    <script type="module">
+        import { supabase } from './config.js';
+
+        window.handleSignin = async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) throw error;
+
+                // Successful login, route to dashboard
+                window.location.href = 'dashboard.html';
+            } catch (err) {
+                alert("Authentication Failed: " + err.message);
+                console.error("Sign-in error:", err);
+            }
+        }
+    </script>
+</body>
+</html>
