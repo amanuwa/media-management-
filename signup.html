@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Registration - Ethiopian Communication Bureau</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            margin: 0; color: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column;
+            background-color: #02040e; position: relative; overflow-x: hidden;
+        }
+        #cyberCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .app-interface { position: relative; z-index: 10; }
+    </style>
+</head>
+<body class="flex flex-col justify-between">
 
+    <!-- Holographic Background Canvas -->
+    <canvas id="cyberCanvas"></canvas>
+
+    <!-- Top Security Header -->
+    <header class="app-interface w-full bg-slate-900/95 backdrop-blur-md border-b border-blue-500/30 px-6 py-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="h-3 w-3 rounded-full bg-blue-500 animate-pulse"></div>
+            <span class="text-blue-400 font-mono text-xs md:text-sm tracking-wider font-bold">// ETHIOPIAN COMMUNICATION BUREAU MANAGING PORTAL</span>
+        </div>
+        <div class="text-xs font-mono text-slate-400 hidden sm:block">SECURITY LEVEL: OFFICIAL CLEARANCE</div>
+    </header>
+
+    <!-- Main Registration Container -->
+    <main class="app-interface flex-grow flex items-center justify-center px-4 py-12">
+        <div class="max-w-md w-full bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-400"></div>
+
+            <div class="mb-6 text-center">
+                <div class="inline-flex p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-3 shadow-inner">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+                <h1 class="text-lg font-bold text-white tracking-tight">Create Official Profile</h1>
+                <p class="text-xs text-slate-400 mt-1">Authorized Bureau Personnel Registration Gateway</p>
+            </div>
+
+            <form onsubmit="handleSignup(event)" class="space-y-4 text-xs font-mono">
+                <!-- Full Name -->
+                <div>
+                    <label class="block text-slate-300 mb-1 uppercase tracking-wider text-[10px]">Full Name</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-3.5 top-3 text-slate-500"></i>
+                        <input type="text" id="fullname" required placeholder="Amanuel Bekele" 
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <!-- Gmail / Institutional Email -->
+                <div>
+                    <label class="block text-slate-300 mb-1 uppercase tracking-wider text-[10px]">Institutional Email (Gmail)</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-3 text-slate-500"></i>
+                        <input type="email" id="email" required placeholder="operator@gmail.com" 
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <!-- Corporation / Office -->
+                <div>
+                    <label class="block text-slate-300 mb-1 uppercase tracking-wider text-[10px]">Bureau / Office Division</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-building-columns absolute left-3.5 top-3 text-slate-500"></i>
+                        <select id="corporation" required class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition appearance-none">
+                            <option value="" disabled selected>Select regional office or bureau</option>
+                            <option value="Addis Abeba Woreda 1 Communication Office">Addis Abeba woreda 1</option>
+                            <option value="Benishangul Zone 1 Bureau">benishangul zone 1</option>
+                            <option value="Amhara Region Woreda 1 Media Desk">Amhara region woreda 1</option>
+                            <option value="Oromia Region Agriculture Communication Office">oromia region Agriculture office</option>
+                            <option value="Amhara Region Revenue Bureau">Amhara region revenue Bureau</option>
+                            <option value="Headquarters Media Center">Headquarters Media Center</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Password 1 -->
+                <div>
+                    <label class="block text-slate-300 mb-1 uppercase tracking-wider text-[10px]">Secure Password</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-3.5 top-3 text-slate-500"></i>
+                        <input type="password" id="password" required placeholder="••••••••••••" 
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <!-- Password 2 (Cross-checking) -->
+                <div>
+                    <label class="block text-slate-300 mb-1 uppercase tracking-wider text-[10px]">Confirm Secure Password</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock-keyhole absolute left-3.5 top-3 text-slate-500"></i>
+                        <input type="password" id="confirmPassword" required placeholder="••••••••••••" 
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl tracking-wider uppercase transition shadow-lg shadow-blue-600/30 mt-3 cursor-pointer flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Initialize Registration</span>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center border-t border-slate-800 pt-4 text-xs font-mono">
+                <span class="text-slate-400">Already cleared security clearance?</span> 
+                <a href="index.html" class="text-blue-400 hover:underline ml-1 font-semibold">Sign In</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-interface border-t border-blue-500/20 bg-slate-900/90 py-4 text-center text-slate-400 font-mono text-xs shadow-inner">
+        &copy; 2026 Ethiopian Communication Bureau - Secure Infrastructure Division
+    </footer>
+
+    <!-- Background Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('cyberCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        const streams = [];
+        for (let i = 0; i < 35; i++) {
+            streams.push({ x: (Math.random() - 0.5) * width * 2, y: (Math.random() - 0.5) * height * 2, z: Math.random() * width, speed: Math.random() * 1.5 + 0.5 });
+        }
+        function animate() {
+            ctx.fillStyle = 'rgba(2, 4, 14, 0.25)'; ctx.fillRect(0, 0, width, height);
+            const cx = width / 2, cy = height / 2;
+            streams.forEach(s => {
+                s.z -= s.speed; if (s.z <= 0) { s.z = width; s.x = (Math.random() - 0.5) * width * 2; s.y = (Math.random() - 0.5) * height * 2; }
+                const k = 300 / s.z; const px = s.x * k + cx, py = s.y * k + cy;
+                if (px >= 0 && px <= width && py >= 0 && py <= height) {
+                    ctx.beginPath(); ctx.arc(px, py, k * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 242, 254, ${1 - s.z / width})`; ctx.fill();
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Supabase Registration Module -->
+    <script type="module">
+        import { supabase } from './config.js';
+
+        window.handleSignup = async function(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const corporation = document.getElementById('corporation').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Password Cross Checking Validation
+            if (password !== confirmPassword) {
+                alert("Security Error: Passwords do not match. Please verify your entries.");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: fullName,
+                            corporation: corporation
+                        }
+                    }
+                });
+
+                if (error) throw error;
+
+                // Sync data into your public profiles table for easy tracking
+                if (data.user) {
+                    await supabase.from('profiles').insert([
+                        { id: data.user.id, username: fullName, corporation: corporation, email: email }
+                    ]);
+                }
+
+                alert("Registration successful. Routing to Secure Dashboard...");
+                window.location.href = 'dashboard.html';
+
+            } catch (err) {
+                alert("Registration failed: " + err.message);
+                console.error("Signup error:", err);
+            }
+        }
+    </script>
+</body>
+</html>
