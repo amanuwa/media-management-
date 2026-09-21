@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Governmental communication media management board</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            margin: 0; color: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column;
+            background-color: #02040e; position: relative; overflow-x: hidden;
+        }
+        #cyberCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .app-interface { position: relative; z-index: 10; }
+    </style>
+</head>
+<body class="flex flex-col justify-between">
 
+    <!-- Holographic Background Canvas -->
+    <canvas id="cyberCanvas"></canvas>
+
+    <!-- Top Security Header with Logged In User & Sign Out -->
+    <header class="app-interface w-full bg-slate-900/95 backdrop-blur-md border-b border-blue-500/30 px-6 py-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="h-3 w-3 rounded-full bg-blue-500 animate-pulse"></div>
+            <span class="text-blue-400 font-mono text-xs md:text-sm tracking-wider font-bold">// ETHIOPIAN COMMUNICATION BUREAU MANAGING PORTAL</span>
+        </div>
+        <div class="flex items-center space-x-4 font-mono text-xs">
+            <div class="text-slate-300 flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
+                <i class="fa-solid fa-user-shield text-blue-400"></i>
+                <span id="loggedInUser">Loading Operator...</span>
+            </div>
+            <button onclick="handleSignOut()" class="bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-500/30 px-3 py-1.5 rounded-lg transition flex items-center space-x-1.5 cursor-pointer">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Sign Out</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="app-interface flex-grow max-w-7xl w-full mx-auto px-4 py-8 flex flex-col items-center">
+        
+        <!-- Portal Main Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-xl md:text-2xl font-bold text-white font-mono tracking-tight">Governmental communication media management boared</h1>
+            <p class="text-xs text-slate-400 font-mono mt-1">Central Oversight & Compliance Control Dashboard</p>
+        </div>
+
+        <!-- Three Side-by-Side Control Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mb-10">
+            <!-- Button 1 -->
+            <button onclick="switchTab('corporate')" id="btnCorporate" class="bg-blue-600 text-white font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center space-x-2 cursor-pointer border border-blue-400/40">
+                <i class="fa-solid fa-building"></i>
+                <span>1 - Governmental corporate</span>
+            </button>
+            <!-- Button 2 -->
+            <button onclick="switchTab('ministry')" id="btnMinistry" class="bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer">
+                <i class="fa-solid fa-landmark"></i>
+                <span>2 - Ministry institution</span>
+            </button>
+            <!-- Button 3 (Routes to message.html) -->
+            <button onclick="window.location.href='message.html'" class="bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer">
+                <i class="fa-solid fa-comments"></i>
+                <span>3 - Message</span>
+            </button>
+        </div>
+
+        <!-- Dynamic Data Section (Changes data values based on selected button) -->
+        <div id="dataSection" class="w-full space-y-8">
+            
+            <!-- Table 1: Posts Log (Last Month - Current Month) -->
+            <div class="bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 shadow-xl">
+                <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800 font-mono">
+                    <h2 id="table1Title" class="text-sm font-bold text-white uppercase tracking-wider">Posts Analysis (August 2026 - September 2026)</h2>
+                    <span class="text-xs text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded border border-blue-500/20">Active Matrix</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left font-mono text-xs">
+                        <thead>
+                            <tr class="text-slate-400 border-b border-slate-800">
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Institution Name</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Date Posted</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Data Posted</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Data Type</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Username Posted</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+                            <!-- Populated dynamically via script -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table 2: Activity Status Tracking (Green/Red Evaluation) -->
+            <div class="bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 shadow-xl">
+                <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800 font-mono">
+                    <h2 id="table2Title" class="text-sm font-bold text-white uppercase tracking-wider">Institution Activity Status (August 2026 - September 2026)</h2>
+                    <div class="flex space-x-2 text-[10px]">
+                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded">Green: Frequently Posting</span>
+                        <span class="bg-red-500/10 text-red-400 border border-red-500/30 px-2 py-0.5 rounded">Red: Not Posting</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left font-mono text-xs">
+                        <thead>
+                            <tr class="text-slate-400 border-b border-slate-800">
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Institution Name</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Sector Type</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Compliance Status</th>
+                                <th class="pb-3 px-3 uppercase tracking-wider text-[10px]">Total Outputs</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statusTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+                            <!-- Populated dynamically via script -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-interface border-t border-blue-500/20 bg-slate-900/90 py-4 text-center text-slate-400 font-mono text-xs shadow-inner">
+        &copy; 2026 Ethiopian Communication Bureau - Secure Infrastructure Division
+    </footer>
+
+    <!-- Background Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('cyberCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        const streams = [];
+        for (let i = 0; i < 35; i++) {
+            streams.push({ x: (Math.random() - 0.5) * width * 2, y: (Math.random() - 0.5) * height * 2, z: Math.random() * width, speed: Math.random() * 1.5 + 0.5 });
+        }
+        function animate() {
+            ctx.fillStyle = 'rgba(2, 4, 14, 0.25);'; ctx.fillRect(0, 0, width, height);
+            const cx = width / 2, cy = height / 2;
+            streams.forEach(s => {
+                s.z -= s.speed; if (s.z <= 0) { s.z = width; s.x = (Math.random() - 0.5) * width * 2; s.y = (Math.random() - 0.5) * height * 2; }
+                const k = 300 / s.z; const px = s.x * k + cx, py = s.y * k + cy;
+                if (px >= 0 && px <= width && py >= 0 && py <= height) {
+                    ctx.beginPath(); ctx.arc(px, py, k * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 242, 254, ${1 - s.z / width})`; ctx.fill();
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Session & Dynamic Table Logic -->
+    <script type="module">
+        import { supabase } from './config.js';
+
+        // 1. Fetch and display logged in user session
+        async function checkUserSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session && session.user) {
+                const metadata = session.user.user_metadata;
+                const displayName = metadata?.full_name || metadata?.username || session.user.email;
+                document.getElementById('loggedInUser').textContent = displayName;
+            } else {
+                // Fallback if accessed without active session
+                document.getElementById('loggedInUser').textContent = "Amanuel Bekele (Authorized)";
+            }
+        }
+        checkUserSession();
+
+        // 2. Functional Sign Out
+        window.handleSignOut = async function() {
+            try {
+                await supabase.auth.signOut();
+                window.location.href = 'index.html';
+            } catch (err) {
+                console.error("Sign out error:", err);
+                window.location.href = 'index.html';
+            }
+        }
+
+        // 3. Dataset definitions for Corporate vs Ministry views (Last Month - Current Month: August 2026 - September 2026)
+        const datasets = {
+            corporate: {
+                t1Title: "Governmental Corporate Posts (August 2026 - September 2026)",
+                t2Title: "Corporate Compliance Status: Frequently Posting (Green) vs Not Posting (Red)",
+                posts: [
+                    { institution: "Addis Abeba Woreda 1 Corporate Desk", date: "2026-09-20", dataPosted: "Metropolitan Expansion Brief", type: "Press Release", user: "amanuel.b" },
+                    { institution: "Amhara Region Revenue Public Relations", date: "2026-09-18", dataPosted: "Q3 Tax Revenue Audit Summary", type: "Statistical Report", user: "kebede.m" },
+                    { institution: "Oromia Region Agricultural Media Unit", date: "2026-09-12", dataPosted: "Irrigation Project Progress Video", type: "Multimedia", user: "chala.g" },
+                    { institution: "Headquarters Corporate Media Center", date: "2026-08-29", dataPosted: "National Policy Framework Document", type: "Official Bulletin", user: "sara.k" }
+                ],
+                statuses: [
+                    { institution: "Addis Abeba Woreda 1 Corporate Desk", sector: "Metropolitan Corporate", status: "Frequently Posting", type: "green", count: "42 Outputs" },
+                    { institution: "Amhara Region Revenue Public Relations", sector: "Regional Revenue", status: "Frequently Posting", type: "green", count: "38 Outputs" },
+                    { institution: "Oromia Region Agricultural Media Unit", sector: "Agricultural Sector", status: "Frequently Posting", type: "green", count: "29 Outputs" },
+                    { institution: "Benishangul Zone 1 Corporate Bureau", sector: "Zonal Administration", status: "Not Posting", type: "red", count: "0 Outputs" },
+                    { institution: "Dire Dawa Corporate Media Cell", sector: "City Administration", status: "Not Posting", type: "red", count: "1 Output" }
+                ]
+            },
+            ministry: {
+                t1Title: "Ministry Institution Posts (August 2026 - September 2026)",
+                t2Title: "Ministry Compliance Status: Frequently Posting (Green) vs Not Posting (Red)",
+                posts: [
+                    { institution: "Ministry of Innovation and Technology", date: "2026-09-21", dataPosted: "National AI Governance Policy", type: "Regulatory Draft", user: "dr.abebe" },
+                    { institution: "Ministry of Agriculture & Food Security", date: "2026-09-19", dataPosted: "Harvest Season Yield Analysis", type: "Data Matrix", user: "tadesse.w" },
+                    { institution: "Ministry of Trade and Regional Integration", date: "2026-09-14", dataPosted: "Cross-Border Trade Statistics", type: "Report", user: "tigist.h" },
+                    { institution: "Ministry of Communication Services", date: "2026-09-02", dataPosted: "Weekly National Briefing Transcript", type: "Audio/Video", user: "amanuel.b" }
+                ],
+                statuses: [
+                    { institution: "Ministry of Innovation and Technology", sector: "Federal Technology", status: "Frequently Posting", type: "green", count: "54 Outputs" },
+                    { institution: "Ministry of Agriculture & Food Security", sector: "Federal Agriculture", status: "Frequently Posting", type: "green", count: "48 Outputs" },
+                    { institution: "Ministry of Communication Services", sector: "Federal Media", status: "Frequently Posting", type: "green", count: "65 Outputs" },
+                    { institution: "Ministry of Mines and Petroleum", sector: "Federal Industry", status: "Not Posting", type: "red", count: "2 Outputs" },
+                    { institution: "Ministry of Tourism Infrastructure", sector: "Federal Services", status: "Not Posting", type: "red", count: "0 Outputs" }
+                ]
+            }
+        };
+
+        // 4. Render Table Functions
+        window.switchTab = function(type) {
+            const btnCorp = document.getElementById('btnCorporate');
+            const btnMin = document.getElementById('btnMinistry');
+            
+            if (type === 'corporate') {
+                btnCorp.className = "bg-blue-600 text-white font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center space-x-2 cursor-pointer border border-blue-400/40";
+                btnMin.className = "bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer";
+                renderData(datasets.corporate);
+            } else {
+                btnMin.className = "bg-blue-600 text-white font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center space-x-2 cursor-pointer border border-blue-400/40";
+                btnCorp.className = "bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold py-3.5 px-6 rounded-xl shadow-lg border border-slate-700 transition flex items-center justify-center space-x-2 cursor-pointer";
+                renderData(datasets.ministry);
+            }
+        }
+
+        function renderData(dataObj) {
+            document.getElementById('table1Title').textContent = dataObj.t1Title;
+            document.getElementById('table2Title').textContent = dataObj.t2Title;
+
+            // Render Posts Table
+            const postsBody = document.getElementById('postsTableBody');
+            postsBody.innerHTML = dataObj.posts.map(p => `
+                <tr class="hover:bg-slate-800/40 transition">
+                    <td class="py-3 px-3 font-medium text-white">${p.institution}</td>
+                    <td class="py-3 px-3 text-slate-400">${p.date}</td>
+                    <td class="py-3 px-3 text-blue-300">${p.dataPosted}</td>
+                    <td class="py-3 px-3"><span class="bg-slate-800 px-2 py-0.5 rounded text-[10px] text-slate-300 border border-slate-700">${p.type}</span></td>
+                    <td class="py-3 px-3 text-slate-400">@${p.user}</td>
+                </tr>
+            `).join('');
+
+            // Render Status Table (Green for frequent, Red for not posting)
+            const statusBody = document.getElementById('statusTableBody');
+            statusBody.innerHTML = dataObj.statuses.map(s => {
+                const badgeColor = s.type === 'green' 
+                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' 
+                    : 'bg-red-500/10 text-red-400 border-red-500/30';
+                const icon = s.type === 'green' ? 'fa-circle-check' : 'fa-triangle-exclamation';
+                
+                return `
+                    <tr class="hover:bg-slate-800/40 transition">
+                        <td class="py-3 px-3 font-medium text-white">${s.institution}</td>
+                        <td class="py-3 px-3 text-slate-400">${s.sector}</td>
+                        <td class="py-3 px-3">
+                            <span class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded border text-[10px] font-bold ${badgeColor}">
+                                <i class="fa-solid ${icon}"></i>
+                                <span>${s.status}</span>
+                            </span>
+                        </td>
+                        <td class="py-3 px-3 text-slate-300 font-bold">${s.count}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Initialize default view to Corporate
+        renderData(datasets.corporate);
+    </script>
+</body>
+</html>
